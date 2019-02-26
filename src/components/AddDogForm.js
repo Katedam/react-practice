@@ -2,35 +2,41 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 export class AddDogForm extends PureComponent {
-  constructor(props) {
-    super(props);
-    
+  static propTypes = {
+    addDog: PropTypes.func.isRequired
   }
 
+  state = {
+    name: 'spot',
+    age: '2',
+    weight: '40lbs',
+  }
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  }
+
+  handleSubmit = event => {
+    const { name, age, weight } = this.state;
+    event.preventDefault();
+    this.props.addDog({ name, age, weight });
+  }  
+
   render() {
-    console.log(this.props);
-    const { name, age, weight, onChange } = this.props;
+    const { name, age, weight } = this.state;
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>Name 
-          <input onChange={onChange} type="text" name="name" value={name}></input>
+          <input onChange={this.handleChange} type="text" name="name" value={name}></input>
         </label>
         <label>Age 
-          <input onChange={onChange} type="text" name="age" value={age}></input>
+          <input onChange={this.handleChange} type="text" name="age" value={age}></input>
         </label>
         <label>Weight 
-          <input onChange={onChange} type="text" name="weight" value={weight}></input>
+          <input onChange={this.handleChange} type="text" name="weight" value={weight}></input>
         </label>
         <button type="submit">Add Dog</button>
       </form>
     );
   }
 }
-
-AddDogForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
-  weight: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
-};
-

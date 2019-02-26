@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { AddDogForm } from './AddDogForm';
+import Dogs from './Dogs';
 
 export default class App extends Component {
 
   state = {
-    name: 'spot',
-    age: '2',
-    weight: '40lbs'
+    dogs: []
   }
 
-  handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+  addDog = dog => {
+    this.setState(state => ({ 
+      dogs: [...state.dogs, dog] 
+    })
+    );
   }
 
   render() {
-    const { name, age, weight } = this.state;
     return (
       <>
       <h1>Add a Dog</h1>
       <AddDogForm 
-        name={name}
-        age={age}
-        weight={weight}
-        onChange={this.handleChange}
+        addDog={this.addDog}
       />
+      <Dogs dogs={this.state.dogs}/>
       </>
     );
   }
 }
+
