@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dog from './Dog';
 
+// Dogs comp takes an array of dogs (passed from App as a prop) and creates an li for each dog using the Dog component to be returned in a ul. Dogs is rendered by app 
 export default function Dogs({ dogs }) {
   const listOfDogs = dogs.map(dog => {
     return <Dog 

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+// The form holds and updates the state of the form inputs. It has a handleChange method to update state and a handleSubmit method that prevents the page from reloading and triggers the calling of addDog passed from App as a prop
 export class AddDogForm extends PureComponent {
   static propTypes = {
     addDog: PropTypes.func.isRequired
@@ -17,8 +18,8 @@ export class AddDogForm extends PureComponent {
   }
 
   handleSubmit = event => {
-    const { name, age, weight } = this.state;
     event.preventDefault();
+    const { name, age, weight } = this.state;
     this.props.addDog({ name, age, weight });
   }  
 
